@@ -160,7 +160,13 @@ The app requires the following permissions:
 
 ## License
 
-This is a template project - feel free to use it for your own projects.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+You are free to use this template for your own projects, including commercial projects.
+
+## Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to contribute to this project.
 
 ## Credits
 

@@ -10,6 +10,18 @@ import java.util.Map;
 
 import fi.iki.elonen.NanoHTTPD;
 
+/**
+ * Simple HTTP server using NanoHTTPD to serve files from Android assets.
+ * 
+ * This server is used to serve the HTML page and SWF files to the WebView
+ * because Ruffle requires files to be loaded via HTTP/HTTPS protocol.
+ * 
+ * The server:
+ * - Listens on the specified port (default 8080)
+ * - Serves all files from the Android assets directory
+ * - Automatically determines MIME types based on file extensions
+ * - Supports common web file types (HTML, JS, CSS, images, SWF, etc.)
+ */
 public class SimpleHTTPServer extends NanoHTTPD {
     private static final String TAG = "SimpleHTTPServer";
     private final AssetManager assetManager;
@@ -33,11 +45,24 @@ public class SimpleHTTPServer extends NanoHTTPD {
         MIME_TYPES.put("txt", "text/plain");
     }
 
+    /**
+     * Creates a new HTTP server.
+     * 
+     * @param port The port to listen on
+     * @param assetManager The Android AssetManager to access files
+     * @throws IOException If the server cannot start
+     */
     public SimpleHTTPServer(int port, AssetManager assetManager) throws IOException {
         super(port);
         this.assetManager = assetManager;
     }
 
+    /**
+     * Handles incoming HTTP requests and serves files from assets.
+     * 
+     * @param session The HTTP session containing request information
+     * @return HTTP response with the requested file or 404 error
+     */
     @Override
     public Response serve(IHTTPSession session) {
         String uri = session.getUri();
@@ -68,6 +93,12 @@ public class SimpleHTTPServer extends NanoHTTPD {
         }
     }
     
+    /**
+     * Determines the MIME type based on file extension.
+     * 
+     * @param filename The name of the file
+     * @return The MIME type string
+     */
     private String getMimeType(String filename) {
         int dotIndex = filename.lastIndexOf('.');
         if (dotIndex > 0 && dotIndex < filename.length() - 1) {

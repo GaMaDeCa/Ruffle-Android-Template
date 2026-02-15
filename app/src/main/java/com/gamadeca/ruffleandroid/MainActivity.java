@@ -12,6 +12,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
 
+/**
+ * Main activity that hosts a WebView to display Flash content using Ruffle emulator.
+ * 
+ * This activity:
+ * 1. Initializes a WebView with JavaScript enabled
+ * 2. Starts a local NanoHTTPD server to serve assets
+ * 3. Loads the HTML page that contains the Ruffle Flash player
+ * 
+ * The local HTTP server is necessary because Ruffle needs to load the SWF file
+ * via HTTP/HTTPS protocol, not via file:// protocol.
+ */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static final int PORT = 8080;
@@ -33,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
         startServer();
     }
 
+    /**
+     * Configures the WebView with settings required for Ruffle to work properly.
+     * Enables JavaScript, DOM storage, and file access.
+     */
     private void setupWebView() {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -53,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebChromeClient(new WebChromeClient());
     }
 
+    /**
+     * Starts the local HTTP server and loads the game page.
+     * The server serves files from the assets directory.
+     */
     private void startServer() {
         try {
             server = new SimpleHTTPServer(PORT, getAssets());
@@ -79,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Allows WebView to handle back button navigation.
+     */
     @Override
     public void onBackPressed() {
         if (webView.canGoBack()) {

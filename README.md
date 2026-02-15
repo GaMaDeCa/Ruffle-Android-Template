@@ -56,11 +56,29 @@ Ruffle-Android-Template/
    - Select "Open an Existing Project"
    - Navigate to the cloned directory
    - Wait for Gradle sync to complete
+   - Android Studio will automatically download the Gradle wrapper on first sync
 
 4. **Build and Run:**
    - Connect an Android device or start an emulator
    - Click the "Run" button (or press Shift+F10)
    - The app will install and launch automatically
+
+### Alternative: Command Line Build
+
+If you prefer to build from the command line:
+
+```bash
+# On Linux/Mac
+./gradlew assembleDebug
+
+# On Windows
+gradlew.bat assembleDebug
+
+# Install on connected device
+./gradlew installDebug
+```
+
+Note: On first build, Gradle will download the wrapper and all dependencies. This may take several minutes.
 
 ## How It Works
 

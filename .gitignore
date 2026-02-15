@@ -20,6 +20,10 @@ release/
 .gradle/
 build/
 
+# Gradle wrapper jar (will be generated on first build)
+# Uncomment if you want to commit it:
+# !gradle/wrapper/gradle-wrapper.jar
+
 # Local configuration file (sdk path, etc)
 local.properties
 
